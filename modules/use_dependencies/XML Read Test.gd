@@ -2,4 +2,6 @@ extends Node
 
 
 func _ready() -> void:
-	pass
+	var output := []
+	OS.execute("pwd", [], true, output)
+	print(output)

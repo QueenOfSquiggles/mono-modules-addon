@@ -18,11 +18,17 @@ func refresh() -> void:
 	if root_folder.begins_with("/"):
 		push_warning("Weird edge case hit! root folder starts with '/', not 'res://'")
 		return
+
 	module_name = _find_csproj()
+	if module_name == "":
+		return
+
 	dependencies = _get_dependencies(root_folder + "/" + module_name)
 	resource_name = module_name
 	ResourceSaver.save(resource_path, self)
-	print("ModuleDef done refreshing")
+
+func get_csproj() -> String:
+	return root_folder + "/" + module_name
 
 func _get_folder() -> String:
 	return resource_path.get_base_dir()
@@ -38,12 +44,11 @@ func _find_csproj() -> String:
 		filepath = dir.get_next()
 	dir.list_dir_end()
 	if not filepath.is_valid_filename():
-		push_error("Failed to find a csproj in the same folder as this ModuleDef. This is a problem?")
 		return ""
 	return filepath.get_file()
 
+
 func _get_dependencies(path : String) -> Array:
-	print("Loading deps for ", path)
 	var data = XMLHelper.read_xml(path)
 	data = XMLHelper.join_path(data, "Project/ItemGroup/ProjectReference")
 	var data_attribs := XMLHelper.join_attributes(data)
