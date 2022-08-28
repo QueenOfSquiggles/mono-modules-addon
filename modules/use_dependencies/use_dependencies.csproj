@@ -1,0 +1,12 @@
+<Project Sdk="Godot.NET.Sdk/3.3.0">
+
+  <ItemGroup>
+    <ProjectReference Include="..\contracts\contracts.csproj" />
+    <ProjectReference Include="..\transform_extension\transform_extension.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+
+</Project>
