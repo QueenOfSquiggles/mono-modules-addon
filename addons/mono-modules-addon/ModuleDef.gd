@@ -1,9 +1,13 @@
 extends Resource
 class_name ModuleDef
 
-export (String, MULTILINE) var description := ""
+# functions injection point
+export var __inject_functions := 0
 
-var module_name : String = ""
-var root_folder : String = ""
-var dependencies := []
+export var module_name : String = "tbd"
+export var root_folder : String = "tbd"
+export (String, MULTILINE) var description := ""
+export var dependencies := ["tbd", "tbd2"]
+
+
 

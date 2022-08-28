@@ -24,11 +24,34 @@ Dictionary (JSON representation):
 	}
 """
 
-class XMLNode:
-	var name := "" # node name
-	var text := "" # text (NODE_TEXT)
-	var attribs := {} # attributes key:value
+
+static func join_path(xml_data : Dictionary, path : String) -> Dictionary:
+	var result := {}
+	var index := 0
+	var m_path := path
+	while xml_data.has(m_path):
+		var node : Dictionary = xml_data[m_path]
+		for key in node.keys():
+			if not result.has(key):
+				result[key] = []
+			(result[key] as Array).append(node[key])
+
+		index += 1
+		m_path = path + ("" if index == 0 else str(index).pad_zeros(2))
 	
+	return result;
+
+static func join_attributes(xml_node : Dictionary, strip_empty_text : bool = true) -> Dictionary:
+	var result := {}
+	var attrib_data :Array = xml_node["attribs"]
+	for attrib in attrib_data:
+		var a_dict := attrib as Dictionary
+		for key in a_dict.keys():
+			if not result.has(key):
+				result[key] = []
+			result[key].append(a_dict[key])
+	return result
+
 static func read_xml(path : String) -> Dictionary:
 	var parser := XMLParser.new()
 	if parser.open(path) != OK:
@@ -51,7 +74,13 @@ static func read_xml(path : String) -> Dictionary:
 
 			XMLParser.NODE_ELEMENT:
 				var node = parser.get_node_name()
-				node_stack.push_back(node)
+				if not node_stack.empty() and node_stack.back() == node:
+					var suffix := 1 # numerical increments
+					while data.has(_stack_path(node_stack)):
+						node_stack[node_stack.size()-1] = node + str(suffix).pad_zeros(2)
+						# post-fix: node_stack.back is now <node>X where there exist X duplicates at the same path. This prevents overlap in the dictionary
+				else:
+					node_stack.push_back(node)
 				data[_stack_path(node_stack)] = {
 					"text" : "",
 					"attribs" : {}
@@ -62,7 +91,6 @@ static func read_xml(path : String) -> Dictionary:
 					var key = parser.get_attribute_name(i)
 					var value = parser.get_attribute_value(i)
 					data[_stack_path(node_stack)]["attribs"][key] = value # icky access method!
-
 			XMLParser.NODE_ELEMENT_END:
 				var node = parser.get_node_name()
 				node_stack.pop_back()

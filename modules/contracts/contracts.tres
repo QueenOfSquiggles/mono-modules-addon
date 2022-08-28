@@ -4,4 +4,8 @@
 
 [resource]
 script = ExtResource( 1 )
+__inject_functions = 0
+module_name = "tbd"
+root_folder = "tbd"
 description = ""
+dependencies = [ "tbd", "tbd2" ]
