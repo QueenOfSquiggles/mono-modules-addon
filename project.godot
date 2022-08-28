@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://addons/mono-modules-addon/ModuleDef.gd"
 }, {
 "base": "Node",
+"class": "PathHelper",
+"language": "GDScript",
+"path": "res://addons/mono-modules-addon/util/PathHelper.gd"
+}, {
+"base": "Node",
 "class": "XMLHelper",
 "language": "GDScript",
-"path": "res://addons/mono-modules-addon/XMLHelper.gd"
+"path": "res://addons/mono-modules-addon/util/XMLHelper.gd"
 } ]
 _global_script_class_icons={
-"ModuleDef": "",
+"ModuleDef": "res://addons/mono-modules-addon/icons/widgets_FILL1_wght700_GRAD-25_opsz20.svg",
+"PathHelper": "",
 "XMLHelper": ""
 }
 

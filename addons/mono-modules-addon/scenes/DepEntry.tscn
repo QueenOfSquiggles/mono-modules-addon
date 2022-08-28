@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/mono-modules-addon/icons/remove_FILL1_wght700_GRAD-25_opsz20.svg" type="Texture" id=1]
+[ext_resource path="res://addons/mono-modules-addon/icons/label_FILL1_wght700_GRAD-25_opsz20.svg" type="Texture" id=2]
+[ext_resource path="res://addons/mono-modules-addon/scenes/DepEntry.gd" type="Script" id=3]
+
+[node name="DepEntry" type="HBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 26.0
+script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 20.0
+margin_bottom = 26.0
+hint_tooltip = "A referenced dependency"
+texture = ExtResource( 2 )
+
+[node name="LblName" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 6.0
+margin_right = 130.0
+margin_bottom = 20.0
+hint_tooltip = "The name of the *.csproj file, should match module name"
+mouse_filter = 0
+text = "Reference Name"
+
+[node name="VSeparator" type="VSeparator" parent="."]
+margin_left = 134.0
+margin_right = 138.0
+margin_bottom = 26.0
+
+[node name="LblPath" type="Label" parent="."]
+margin_left = 142.0
+margin_top = 6.0
+margin_right = 988.0
+margin_bottom = 20.0
+hint_tooltip = "The full path for the module"
+mouse_filter = 0
+size_flags_horizontal = 3
+text = "Reference Path"
+clip_text = true
+
+[node name="Button" type="Button" parent="."]
+margin_left = 992.0
+margin_right = 1024.0
+margin_bottom = 26.0
+hint_tooltip = "Remove this reference"
+icon = ExtResource( 1 )
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

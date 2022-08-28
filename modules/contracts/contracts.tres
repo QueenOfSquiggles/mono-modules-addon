@@ -3,9 +3,9 @@
 [ext_resource path="res://addons/mono-modules-addon/ModuleDef.gd" type="Script" id=1]
 
 [resource]
+resource_name = "contracts.csproj"
 script = ExtResource( 1 )
-__inject_functions = 0
-module_name = "tbd"
-root_folder = "tbd"
+module_name = "contracts.csproj"
+root_folder = "res://modules/contracts"
+dependencies = [  ]
 description = ""
-dependencies = [ "tbd", "tbd2" ]

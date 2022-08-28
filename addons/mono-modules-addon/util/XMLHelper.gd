@@ -42,6 +42,8 @@ static func join_path(xml_data : Dictionary, path : String) -> Dictionary:
 	return result;
 
 static func join_attributes(xml_node : Dictionary, strip_empty_text : bool = true) -> Dictionary:
+	if not xml_node.has("attribs"):
+		return {}
 	var result := {}
 	var attrib_data :Array = xml_node["attribs"]
 	for attrib in attrib_data:
@@ -101,8 +103,6 @@ static func read_xml(path : String) -> Dictionary:
 		var err = parser.read()
 		if err != OK: # includes EOF
 			break
-
-	print(JSON.print(data, "\t", true))
 	return data
 
 static func _stack_path(stack : Array) -> String:

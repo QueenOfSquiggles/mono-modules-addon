@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/mono-modules-addon/ModuleDef.gd" type="Script" id=1]
+
+[resource]
+resource_name = "use_dependencies.csproj"
+script = ExtResource( 1 )
+module_name = "use_dependencies.csproj"
+root_folder = "res://modules/use_dependencies"
+dependencies = [ "..\\contracts\\contracts.csproj", "..\\transform_extension\\transform_extension.csproj" ]
+description = ""
